@@ -133,6 +133,11 @@
 				TargetAttributes = {
 					56F88321217C5F9500424A6F = {
 						CreatedOnToolsVersion = 10.0;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 0;
+							};
+						};
 					};
 				};
 			};
@@ -361,7 +366,6 @@
 			baseConfigurationReference = 1D1774B3E6C0B2018D5113C1 /* Pods-TranslationToolBox.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = TranslationToolBox/TranslationToolBox.entitlements;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -383,7 +387,6 @@
 			baseConfigurationReference = F03C4CEB8D972A705D0BAA9B /* Pods-TranslationToolBox.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = TranslationToolBox/TranslationToolBox.entitlements;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;

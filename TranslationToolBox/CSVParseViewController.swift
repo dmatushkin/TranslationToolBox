@@ -130,18 +130,16 @@ class CSVParseViewController: NSViewController, NSTableViewDataSource, NSTableVi
                             try unit.appendElement("target").text(translation)
                         }
                     } else {
-                        if let target = try unit.getElementsByTag("target").first() {
-                            if try target.text() == "" {
+                        if ((try? unit.getElementsByTag("target").first()?.text())??.count ?? 0) == 0  {
+                            if !emptyKeys.contains(source) {
                                 emptyKeys.append(source)
                             }
-                        } else {
-                            emptyKeys.append(source)
                         }
                     }
                 }
             }
             let result = try xml.html()
-            //try result.write(to: self.translationURL, atomically: true, encoding: .utf8)
+            try result.write(to: self.translationURL, atomically: true, encoding: .utf8)
             //self.dismiss(self)
             self.performSegue(withIdentifier: "translationReportSegue", sender: TranslationReport(emptyTranslations: emptyKeys, keysNotInTranslation: translationData.keys.filter({!allKeys.contains($0)})))
         } catch {
