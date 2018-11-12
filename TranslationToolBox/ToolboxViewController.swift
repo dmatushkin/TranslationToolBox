@@ -9,6 +9,13 @@
 import Cocoa
 import SwiftSoup
 
+extension String {
+    
+    func postformat() -> String {
+        return self.replacingOccurrences(of: "target>\n\\s*", with: "target>", options: .regularExpression).replacingOccurrences(of: "\n\\s*</target", with: "</target", options: .regularExpression).replacingOccurrences(of: "\\s*</target", with: "</target", options: .regularExpression).replacingOccurrences(of: "note>\n\\s*", with: "note>", options: .regularExpression).replacingOccurrences(of: "\n\\s*</note", with: "</note", options: .regularExpression).replacingOccurrences(of: "\\s*</note", with: "</note", options: .regularExpression)
+    }
+}
+
 class ToolboxViewController: NSViewController {
 
     private var translationUrl: URL?
@@ -70,7 +77,7 @@ class ToolboxViewController: NSViewController {
                 for tag in files {
                     try tag.attr("target-language", self.languageTextField.stringValue)
                 }
-                let result = try xml.html()
+                let result = try xml.html().postformat()
                 try result.write(to: url, atomically: true, encoding: .utf8)
             } catch {
                 self.fileParseError(message: error.localizedDescription)

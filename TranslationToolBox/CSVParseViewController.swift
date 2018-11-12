@@ -67,10 +67,10 @@ class CSVParseViewController: NSViewController, NSTableViewDataSource, NSTableVi
         super.viewDidLoad()
         self.sourceLabel.stringValue = "Source \(self.sourceRow)"
         self.targetLabel.stringValue = "Target \(self.targetRow)"
-        if let str = try? String(contentsOf: self.dataURL) {
+        if let str = try? String(contentsOf: self.dataURL).replacingOccurrences(of: "\\n", with: " ") {
             let lines = str.components(separatedBy: CharacterSet.newlines)
             if let firstLine = lines.first {
-                let headers = firstLine.split(separator: Character(Unicode.Scalar(9)!))
+                let headers = firstLine.split(separator: Character(Unicode.Scalar(9)!), maxSplits: Int.max, omittingEmptySubsequences: false)
                 let existingColumns = self.tableView.tableColumns
                 for column in existingColumns {
                     self.tableView.removeTableColumn(column)
@@ -82,8 +82,8 @@ class CSVParseViewController: NSViewController, NSTableViewDataSource, NSTableVi
                 }
             }
             for line in lines {
-                let cells = line.split(separator: Character(Unicode.Scalar(9)!)).map({String($0)})
-                if cells.count > 0 {
+                let cells = line.split(separator: Character(Unicode.Scalar(9)!), maxSplits: Int.max, omittingEmptySubsequences: false).map({String($0)})
+                if cells.count > 0 && cells.filter({$0.count > 0}).count > 0 {
                     self.data.append(cells)
                 }
             }
@@ -138,7 +138,7 @@ class CSVParseViewController: NSViewController, NSTableViewDataSource, NSTableVi
                     }
                 }
             }
-            let result = try xml.html()
+            let result = try xml.html().postformat()
             try result.write(to: self.translationURL, atomically: true, encoding: .utf8)
             //self.dismiss(self)
             self.performSegue(withIdentifier: "translationReportSegue", sender: TranslationReport(emptyTranslations: emptyKeys, keysNotInTranslation: translationData.keys.filter({!allKeys.contains($0)})))
