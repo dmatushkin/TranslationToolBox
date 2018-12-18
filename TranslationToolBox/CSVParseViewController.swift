@@ -58,6 +58,7 @@ class CSVParseViewController: NSViewController, NSTableViewDataSource, NSTableVi
     var targetRow: Int = 1 {
         didSet {
             self.targetLabel.stringValue = "Target \(self.targetRow)"
+            self.tableView.selectColumnIndexes(IndexSet(integer: self.targetRow), byExtendingSelection: false)
         }
     }
     
@@ -67,7 +68,10 @@ class CSVParseViewController: NSViewController, NSTableViewDataSource, NSTableVi
         super.viewDidLoad()
         self.sourceLabel.stringValue = "Source \(self.sourceRow)"
         self.targetLabel.stringValue = "Target \(self.targetRow)"
-        if let str = try? String(contentsOf: self.dataURL).replacingOccurrences(of: "\\n", with: " ") {
+        if var str = try? String(contentsOf: self.dataURL).replacingOccurrences(of: "\\n", with: " ") {
+            while str.contains("  ") {
+                str = str.replacingOccurrences(of: "  ", with: " ")                
+            }
             let lines = str.components(separatedBy: CharacterSet.newlines)
             if let firstLine = lines.first {
                 let headers = firstLine.split(separator: Character(Unicode.Scalar(9)!), maxSplits: Int.max, omittingEmptySubsequences: false)
@@ -88,6 +92,7 @@ class CSVParseViewController: NSViewController, NSTableViewDataSource, NSTableVi
                 }
             }
             self.tableView.reloadData()
+            self.tableView.selectColumnIndexes(IndexSet(integer: self.targetRow), byExtendingSelection: false)
         }
     }
     
@@ -130,7 +135,13 @@ class CSVParseViewController: NSViewController, NSTableViewDataSource, NSTableVi
                             try unit.appendElement("target").text(translation)
                         }
                     } else {
-                        if ((try? unit.getElementsByTag("target").first()?.text())??.count ?? 0) == 0  {
+                        if let replacement = Levenshtein.closest(source: source, destination: Array(translationData.keys)), self.confirm(source: source, replacement: replacement), let translation = translationData[replacement] {
+                                if let target = try unit.getElementsByTag("target").first() {
+                                    try target.text(translation)
+                                } else {
+                                    try unit.appendElement("target").text(translation)
+                                }
+                        } else if ((try? unit.getElementsByTag("target").first()?.text())??.count ?? 0) == 0  {
                             if !emptyKeys.contains(source) {
                                 emptyKeys.append(source)
                             }
@@ -154,6 +165,17 @@ class CSVParseViewController: NSViewController, NSTableViewDataSource, NSTableVi
         alert.alertStyle = .critical
         alert.addButton(withTitle: "Close")
         alert.runModal()
+    }
+    
+    private func confirm(source: String, replacement: String) -> Bool {
+        let alert = NSAlert()
+        alert.messageText = "Key not found"
+        alert.informativeText = "Key \"\(source)\" not found in translation, use \"\(replacement)\" instead?"
+        alert.alertStyle = .critical
+        alert.addButton(withTitle: "Yes")
+        alert.addButton(withTitle: "No")
+        let response = alert.runModal()
+        return response.rawValue == 1000
     }
     
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {

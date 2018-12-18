@@ -10,6 +10,7 @@
 		12030A41674641996E654439 /* Pods_TranslationToolBox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34BA6C1C9E805BC02B25EB91 /* Pods_TranslationToolBox.framework */; };
 		564D3E0F217C798400FB5D9A /* CSVParseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564D3E0E217C798400FB5D9A /* CSVParseViewController.swift */; };
 		564D3E12217C933700FB5D9A /* TranslationReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564D3E10217C933700FB5D9A /* TranslationReportViewController.swift */; };
+		5675C56821C8F37100C40EEF /* Levenshtein.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5675C56721C8F37100C40EEF /* Levenshtein.swift */; };
 		56F88326217C5F9500424A6F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F88325217C5F9500424A6F /* AppDelegate.swift */; };
 		56F8832A217C5F9700424A6F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56F88329217C5F9700424A6F /* Assets.xcassets */; };
 		56F8832D217C5F9700424A6F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56F8832B217C5F9700424A6F /* Main.storyboard */; };
@@ -23,6 +24,7 @@
 		34BA6C1C9E805BC02B25EB91 /* Pods_TranslationToolBox.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TranslationToolBox.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		564D3E0E217C798400FB5D9A /* CSVParseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVParseViewController.swift; sourceTree = "<group>"; };
 		564D3E10217C933700FB5D9A /* TranslationReportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationReportViewController.swift; sourceTree = "<group>"; };
+		5675C56721C8F37100C40EEF /* Levenshtein.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Levenshtein.swift; sourceTree = "<group>"; };
 		56F88322217C5F9500424A6F /* TranslationToolBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TranslationToolBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		56F88325217C5F9500424A6F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		56F88329217C5F9700424A6F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -78,6 +80,7 @@
 				56F8833B217C67D500424A6F /* TabViewController.swift */,
 				564D3E0E217C798400FB5D9A /* CSVParseViewController.swift */,
 				564D3E10217C933700FB5D9A /* TranslationReportViewController.swift */,
+				5675C56721C8F37100C40EEF /* Levenshtein.swift */,
 			);
 			path = TranslationToolBox;
 			sourceTree = "<group>";
@@ -228,6 +231,7 @@
 				564D3E12217C933700FB5D9A /* TranslationReportViewController.swift in Sources */,
 				56F88336217C63EB00424A6F /* LoadTranslationViewController.swift in Sources */,
 				56F88326217C5F9500424A6F /* AppDelegate.swift in Sources */,
+				5675C56821C8F37100C40EEF /* Levenshtein.swift in Sources */,
 				56F88339217C642300424A6F /* ToolboxViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
