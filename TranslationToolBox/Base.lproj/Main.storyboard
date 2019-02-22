@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14313.18"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -140,7 +140,7 @@
                                         </menuItem>
                                         <menuItem title="Copy" keyEquivalent="c" id="x3v-GG-iWU">
                                             <connections>
-                                                <action selector="copy:" target="Ady-hI-5gd" id="G1f-GL-Joy"/>
+                                                <action selector="copy:" target="Ady-hI-5gd" id="ZQj-fp-n0D"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem title="Paste" keyEquivalent="v" id="gVA-U4-sdL">
@@ -684,7 +684,7 @@
         <scene sceneID="R2V-B0-nI4">
             <objects>
                 <windowController id="B8D-0N-5wS" sceneMemberID="viewController">
-                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
+                    <window key="window" title="Toolbox" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="196" y="240" width="480" height="270"/>
@@ -809,9 +809,21 @@
                                     <action selector="applyCSVAction:" target="y1K-Ff-hbA" id="NtP-g2-W5X"/>
                                 </connections>
                             </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="WsD-fp-40d">
+                                <rect key="frame" x="14" y="128" width="114" height="32"/>
+                                <buttonCell key="cell" type="push" title="Extract data" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="dx2-Im-ncO">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <segue destination="GuC-fJ-QWQ" kind="modal" identifier="extractSegue" id="X7f-Gq-Jnm"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="WsD-fp-40d" firstAttribute="leading" secondItem="sno-DF-KPr" secondAttribute="leading" id="2Q4-CR-1FO"/>
                             <constraint firstItem="WfK-Pd-oVZ" firstAttribute="top" secondItem="91k-59-b1V" secondAttribute="top" constant="20" id="4ye-K6-Bbh"/>
+                            <constraint firstItem="WsD-fp-40d" firstAttribute="top" secondItem="sno-DF-KPr" secondAttribute="bottom" constant="20" id="4zy-LL-IeF"/>
                             <constraint firstItem="IOn-EQ-zx4" firstAttribute="leading" secondItem="qLA-k3-c1n" secondAttribute="trailing" constant="19" id="L2G-NN-uRh"/>
                             <constraint firstItem="WfK-Pd-oVZ" firstAttribute="leading" secondItem="91k-59-b1V" secondAttribute="leading" constant="20" id="SvS-j7-vdm"/>
                             <constraint firstItem="sno-DF-KPr" firstAttribute="top" secondItem="qLA-k3-c1n" secondAttribute="bottom" constant="20" id="baR-Qx-Zfc"/>
@@ -830,10 +842,94 @@
             </objects>
             <point key="canvasLocation" x="1281" y="459"/>
         </scene>
-        <!--Parse View Controller-->
+        <!--Translation data-->
+        <scene sceneID="HXT-aO-nNL">
+            <objects>
+                <viewController title="Translation data" id="GuC-fJ-QWQ" customClass="ExtractionViewController" customModule="TranslationToolBox" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="WWj-dP-Xgv">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c2K-dO-BfE">
+                                <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                                <clipView key="contentView" id="cRv-dP-Fku">
+                                    <rect key="frame" x="1" y="0.0" width="448" height="299"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="sequential" columnReordering="NO" columnSelection="YES" autosaveColumns="NO" typeSelect="NO" headerView="A2U-S9-0EM" id="yt7-5j-bTM">
+                                            <rect key="frame" x="0.0" y="0.0" width="448" height="274"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <size key="intercellSpacing" width="3" height="2"/>
+                                            <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
+                                            <tableColumns>
+                                                <tableColumn width="116" minWidth="40" maxWidth="1000" id="oQU-sr-541">
+                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
+                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
+                                                    </tableHeaderCell>
+                                                    <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" title="Text Cell" id="9RZ-5R-Ssk">
+                                                        <font key="font" metaFont="system"/>
+                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                    <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                </tableColumn>
+                                                <tableColumn width="326" minWidth="40" maxWidth="1000" id="c8q-bZ-yiG">
+                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
+                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
+                                                    </tableHeaderCell>
+                                                    <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" title="Text Cell" id="DCa-G5-749">
+                                                        <font key="font" metaFont="system"/>
+                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                    <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                </tableColumn>
+                                            </tableColumns>
+                                            <connections>
+                                                <outlet property="dataSource" destination="GuC-fJ-QWQ" id="CHA-Er-D42"/>
+                                                <outlet property="delegate" destination="GuC-fJ-QWQ" id="72J-MD-gkM"/>
+                                            </connections>
+                                        </tableView>
+                                    </subviews>
+                                </clipView>
+                                <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="JBR-V3-g4d">
+                                    <rect key="frame" x="1" y="119" width="223" height="15"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                                <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="Zyg-Bd-Cf3">
+                                    <rect key="frame" x="224" y="17" width="15" height="102"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                                <tableHeaderView key="headerView" id="A2U-S9-0EM">
+                                    <rect key="frame" x="0.0" y="0.0" width="448" height="25"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableHeaderView>
+                            </scrollView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="c2K-dO-BfE" secondAttribute="bottom" id="0dQ-nF-pKx"/>
+                            <constraint firstItem="c2K-dO-BfE" firstAttribute="top" secondItem="WWj-dP-Xgv" secondAttribute="top" id="6is-Je-Qi1"/>
+                            <constraint firstItem="c2K-dO-BfE" firstAttribute="leading" secondItem="WWj-dP-Xgv" secondAttribute="leading" id="JUL-7t-DiC"/>
+                            <constraint firstAttribute="trailing" secondItem="c2K-dO-BfE" secondAttribute="trailing" id="XFM-MU-Fdh"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="yt7-5j-bTM" id="NdH-BD-SPm"/>
+                    </connections>
+                </viewController>
+                <customObject id="LND-sK-g58" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1852" y="36"/>
+        </scene>
+        <!--Apply translation-->
         <scene sceneID="CyN-xJ-GAL">
             <objects>
-                <viewController id="oqX-Wb-IpZ" customClass="CSVParseViewController" customModule="TranslationToolBox" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Apply translation" id="oqX-Wb-IpZ" customClass="CSVParseViewController" customModule="TranslationToolBox" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="grx-NI-Kpf">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -844,7 +940,7 @@
                                     <rect key="frame" x="1" y="0.0" width="408" height="219"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="sequential" columnReordering="NO" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" headerView="wry-qo-v6j" id="Ywb-qf-CCy">
+                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="sequential" columnReordering="NO" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" typeSelect="NO" headerView="wry-qo-v6j" id="Ywb-qf-CCy">
                                             <rect key="frame" x="0.0" y="0.0" width="408" height="194"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
@@ -970,10 +1066,10 @@
             </objects>
             <point key="canvasLocation" x="1888" y="459"/>
         </scene>
-        <!--Translation Report View Controller-->
+        <!--Report-->
         <scene sceneID="9rT-cH-p5o">
             <objects>
-                <viewController id="vuN-eP-RF0" customClass="TranslationReportViewController" customModule="TranslationToolBox" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Report" id="vuN-eP-RF0" customClass="TranslationReportViewController" customModule="TranslationToolBox" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="d5E-TM-kdY">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="251"/>
                         <autoresizingMask key="autoresizingMask"/>

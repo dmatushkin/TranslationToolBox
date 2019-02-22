@@ -41,12 +41,7 @@ class ToolboxViewController: NSViewController {
     }
     
     private func fileParseError(message: String) {
-        let alert = NSAlert()
-        alert.messageText = "Unable to parse file"
-        alert.informativeText = message
-        alert.alertStyle = .critical
-        alert.addButton(withTitle: "Close")
-        alert.runModal()
+        NSAlert.showError(title: "Unable to parse file", message: message)
     }
     
     @IBAction func clearFileAction(_ sender: Any) {
@@ -105,6 +100,8 @@ class ToolboxViewController: NSViewController {
             controller.dataURL = url
             controller.toolboxController = self
             controller.translationURL = self.translationUrl
+        } else if segue.identifier == "extractSegue", let controller = segue.destinationController as? ExtractionViewController {
+            controller.translationUrl = self.translationUrl
         }
     }
 }

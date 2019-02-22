@@ -64,10 +64,17 @@ class CSVParseViewController: NSViewController, NSTableViewDataSource, NSTableVi
     
     private var data:[[String]] = []
     
+    @objc private func onItemClicked() {
+        if self.tableView.selectedColumn >= 0 {
+            self.targetRow = self.tableView.selectedColumn
+        }        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.sourceLabel.stringValue = "Source \(self.sourceRow)"
         self.targetLabel.stringValue = "Target \(self.targetRow)"
+        self.tableView.action = #selector(onItemClicked)
         if var str = try? String(contentsOf: self.dataURL).replacingOccurrences(of: "\\n", with: " ") {
             while str.contains("  ") {
                 str = str.replacingOccurrences(of: "  ", with: " ")                
@@ -159,12 +166,7 @@ class CSVParseViewController: NSViewController, NSTableViewDataSource, NSTableVi
     }
     
     private func fileParseError(message: String) {
-        let alert = NSAlert()
-        alert.messageText = "Unable to parse file"
-        alert.informativeText = message
-        alert.alertStyle = .critical
-        alert.addButton(withTitle: "Close")
-        alert.runModal()
+        NSAlert.showError(title: "Unable to parse file", message: message)
     }
     
     private func confirm(source: String, replacement: String) -> Bool {
